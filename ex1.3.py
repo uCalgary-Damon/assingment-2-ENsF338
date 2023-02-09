@@ -1,4 +1,4 @@
-# good_fib was produced using ChatGPT
+# good_fib was partially produced using ChatGPT
 def good_fib(n, cache={}):
     if n == 0 or n == 1:
         return n

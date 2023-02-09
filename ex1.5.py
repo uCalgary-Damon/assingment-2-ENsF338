@@ -7,7 +7,7 @@ def bad_fib(n):
     else:
         return bad_fib(n-1) + bad_fib(n-2)
     
-# good_fib was produced using ChatGPT
+# good_fib was partially produced using ChatGPT
 def good_fib(n, cache={}):
     if n == 0 or n == 1:
         return n
@@ -32,9 +32,10 @@ def main():
     #Plots timing data
     plt.xlabel("nth Fibonacci Number")
     plt.ylabel("Seconds (s)")
+    plt.title("Time to Calculate the nth Fibonacci Number")
     plt.scatter(n, bad_fib_list, label="Bad Fib", color="r")
     plt.scatter(n, good_fib_list, label="Good Fib", color="g")
-    plt.figlegend(loc="upper center")
+    plt.figlegend(loc="upper left")
     plt.show()
 
 if __name__ == "__main__":
