@@ -1,6 +1,7 @@
 import sys
 import json
 import timeit
+from matplotlib import pyplot as plt
 
 sys.setrecursionlimit(20000)
 
@@ -14,30 +15,26 @@ def main():
         times.append(time)
 
     
-    input2 = input = json.load(open("input.json"))
+    input2 = json.load(open("input.json"))
     for arr in input2:
         time = timeit.timeit(lambda:altfunc1(arr, 0, len(arr) - 1), number=1)
         times2.append(time)
-
-    print('Timing for Pivot at first element: \n', times)
-    print(input[0])
-    print('Sorted =',checkAsc(input[0]))
-    print('Timing for Pivot at second element: \n', times2)
-    print(input2[0])
-    print('Sorted =',checkAsc(input2[0]))
     
+    print(times)
+    print(times2)
 
-    """
+    x = [len(arr) for arr in input]
+    
     plt.title("Timing of Quicksort Algorithm")
     plt.xlabel("Number of Elements")
     plt.ylabel("Time in Seconds")
-    plt.plot(x, times, label="Original JSON")
-    plt.plot(x, times2, label="Adjusted JSON")
+    plt.plot(x, times, label="Original Quicksort")
+    plt.plot(x, times2, label="Adjusted Quicksort")
     plt.legend(loc="best")
     plt.xticks(x)
     plt.show()
-    """
-
+    
+#Original Quicksort - pivot element is at the beginning of the array
 def checkAsc(a):
     j = 0
     i = 1
@@ -70,6 +67,13 @@ def func2(array, start, end):
     array[start], array[high] = array[high], array[start]
     return high
 
+#Adjusted Quicksort - pivot element is at the middle of the array
+def altfunc1(arr, low, high):
+    if low < high:
+        pi = altfunc2(arr, low, high)
+        altfunc1(arr, low, pi)
+        altfunc1(arr, pi + 1, high)
+
 def altfunc2(array, start, end):
     p = array[(start + end) // 2]
     low = start - 1
@@ -87,12 +91,6 @@ def altfunc2(array, start, end):
             break
         array[low], array[high] = array[high], array[low]
     return high
-
-def altfunc1(arr, low, high):
-    if low < high:
-        pi = altfunc2(arr, low, high)
-        altfunc1(arr, low, pi)
-        altfunc1(arr, pi + 1, high)
 
 if __name__ == "__main__":
     main()
