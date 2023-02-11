@@ -13,15 +13,11 @@ def main():
     for arr in input:
         time = timeit.timeit(lambda:func1(arr, 0, len(arr) - 1), number=1)
         times.append(time)
-
-    
+       
     input2 = json.load(open("input.json"))
     for arr in input2:
         time = timeit.timeit(lambda:altfunc1(arr, 0, len(arr) - 1), number=1)
         times2.append(time)
-    
-    print(times)
-    print(times2)
 
     x = [len(arr) for arr in input]
     
@@ -35,16 +31,6 @@ def main():
     plt.show()
     
 #Original Quicksort - pivot element is at the beginning of the array
-def checkAsc(a):
-    j = 0
-    i = 1
-    while i < len(a):
-        if(a[j] > a[i]):
-            return False
-        j+=1
-        i+=1
-    return True
-
 def func1(arr, low, high):
     if low < high:
         pi = func2(arr, low, high)
