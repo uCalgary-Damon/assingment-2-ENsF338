@@ -7,18 +7,26 @@ sys.setrecursionlimit(20000)
 
 def main():
     input = json.load(open("input.json"))
+    input2 = json.load(open("ex2.5.json"))
     times = []
+    times2= []
     
     for arr in input:
         time = timeit.timeit(lambda:func1(arr, 0, len(arr) - 1), number=1)
         times.append(time)
+
+    for arr in input2:
+        time = timeit.timeit(lambda:func1(arr, 0, len(arr) - 1), number=1)
+        times2.append(time)
 
     x = [len(arr) for arr in input]
     
     plt.title("Timing of Quicksort Algorithm")
     plt.xlabel("Number of Elements")
     plt.ylabel("Time in Seconds")
-    plt.plot(x, times)
+    plt.plot(x, times, label="Original JSON")
+    plt.plot(x, times2, label="Adjusted JSON")
+    plt.legend(loc="best")
     plt.xticks(x)
     plt.show()
 
